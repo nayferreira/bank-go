@@ -1,58 +1,33 @@
 package main
 
 import (
+	"bank-go/src/accounts"
 	"fmt"
 )
-
-type CheckingAccount struct {
-	owner       string
-	agencyCode  int
-	accountCode int
-	balance     float64
-}
-
-func (c *CheckingAccount) withdrawAccount(value float64) string {
-	allowsWithdrawal := value > 0 && value <= c.balance
-
-	if allowsWithdrawal {
-		c.balance -= value
-		return "Saque realizado com sucesso"
-	} else {
-		return "Saldo Insuficiente"
-	}
-}
-
-func (c *CheckingAccount) depositAccount(value float64) string {
-	DepositsWithdrawal := value > 0 && c.accountCode != 0
-
-	if DepositsWithdrawal {
-		c.balance += value
-		return "Depósito realizado com sucesso"
-	} else {
-		return "Valor do depósito não pode ser negativo "
-	}
-}
 
 func main() {
 
 	fmt.Println("Bem vindo ao Banco Go '\n'")
 
-	var checkingAccount *CheckingAccount
+	checkingAccount := new(accounts.CheckingAccount)
 
-	checkingAccount = new(CheckingAccount)
+	checkingAccount.Owner = "Nayara"
+	checkingAccount.AgencyCode = 8515
+	checkingAccount.AccountCode = 1919325
+	checkingAccount.Balance = 125.50
 
-	checkingAccount.owner = "Nayara"
-	checkingAccount.agencyCode = 8515
-	checkingAccount.accountCode = 1919325
-	checkingAccount.balance = 125.50
-
-	fmt.Println("Você está logado na conta: ", checkingAccount.owner)
-	fmt.Println("Número de agência: ", checkingAccount.agencyCode, " Número da conta: ", checkingAccount.accountCode)
-	fmt.Println("Seu saldo é de R$: ", checkingAccount.balance)
+	fmt.Println("Você está logado na conta: ", checkingAccount.Owner)
+	fmt.Println("Número de agência: ", checkingAccount.AgencyCode, " Número da conta: ", checkingAccount.AccountCode)
+	fmt.Println("Seu saldo é de R$: ", checkingAccount.Balance)
 	fmt.Println("")
-	fmt.Println(checkingAccount.depositAccount(1000.25))
+	fmt.Println(checkingAccount.DepositAccount(1000.25))
 	fmt.Println("")
-	fmt.Println(checkingAccount.withdrawAccount(500))
+	fmt.Println("Seu saldo é de R$: ", checkingAccount.Balance)
+	fmt.Println("")
+	fmt.Println(checkingAccount.WithdrawAccount(500))
+	fmt.Println("")
+	fmt.Println("Seu saldo é de R$: ", checkingAccount.Balance)
+	fmt.Println("")
 	fmt.Println("*******************************")
 	fmt.Println("")
 	fmt.Println("       Fim do Extrato")
@@ -60,6 +35,27 @@ func main() {
 	fmt.Println("*******************************")
 	fmt.Println("")
 
-	fmt.Println("Seu saldo é de R$: ", checkingAccount.balance)
+	checkingAccount1 := new(accounts.CheckingAccount)
+
+	checkingAccount1.Owner = "Brownie"
+	checkingAccount1.AgencyCode = 8515
+	checkingAccount1.AccountCode = 125963
+	checkingAccount1.Balance = 0.01
+
+	fmt.Println("Iniciando transferência...")
+	fmt.Println("Conta de Origem: ", checkingAccount.Owner)
+	fmt.Println("Saldo: ", checkingAccount.Balance)
+	fmt.Println("Conta de Destino: ", checkingAccount1.Owner)
+	fmt.Println("Saldo: ", checkingAccount1.Balance)
+
+	if checkingAccount.TransferAccount(500, checkingAccount1) {
+		fmt.Println("Conta de Origem: ", checkingAccount.Owner)
+		fmt.Println("Saldo após a transferência: ", checkingAccount.Balance)
+		fmt.Println("Conta de Destino: ", checkingAccount1.Owner)
+		fmt.Println("Saldo após a transferência: ", checkingAccount1.Balance)
+	} else {
+
+		fmt.Println("Transferência não pode ser realizada")
+	}
 
 }
