@@ -1,7 +1,11 @@
 package accounts
 
+import (
+	"bank-go/src/owners"
+)
+
 type CheckingAccount struct {
-	Owner       string
+	Owner       owners.Owner
 	AgencyCode  int
 	AccountCode int
 	Balance     float64

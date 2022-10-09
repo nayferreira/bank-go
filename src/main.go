@@ -11,7 +11,7 @@ func main() {
 
 	checkingAccount := new(accounts.CheckingAccount)
 
-	checkingAccount.Owner = "Nayara"
+	checkingAccount.Owner.Name = "Nayara Ferreira"
 	checkingAccount.AgencyCode = 8515
 	checkingAccount.AccountCode = 1919325
 	checkingAccount.Balance = 125.50
@@ -37,19 +37,19 @@ func main() {
 
 	checkingAccount1 := new(accounts.CheckingAccount)
 
-	checkingAccount1.Owner = "Brownie"
+	checkingAccount1.Owner.Name = "Brownie"
 	checkingAccount1.AgencyCode = 8515
 	checkingAccount1.AccountCode = 125963
 	checkingAccount1.Balance = 0.01
 
 	fmt.Println("Iniciando transferência...")
-	fmt.Println("Conta de Origem: ", checkingAccount.Owner)
+	fmt.Println("Conta de Origem: ", checkingAccount.Owner.Name)
 	fmt.Println("Saldo: ", checkingAccount.Balance)
-	fmt.Println("Conta de Destino: ", checkingAccount1.Owner)
+	fmt.Println("Conta de Destino: ", checkingAccount1.Owner.Name)
 	fmt.Println("Saldo: ", checkingAccount1.Balance)
 
 	if checkingAccount.TransferAccount(500, checkingAccount1) {
-		fmt.Println("Conta de Origem: ", checkingAccount.Owner)
+		fmt.Println("Conta de Origem: ", checkingAccount.Owner.Name)
 		fmt.Println("Saldo após a transferência: ", checkingAccount.Balance)
 		fmt.Println("Conta de Destino: ", checkingAccount1.Owner)
 		fmt.Println("Saldo após a transferência: ", checkingAccount1.Balance)
